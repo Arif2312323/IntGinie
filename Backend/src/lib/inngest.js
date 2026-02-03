@@ -3,8 +3,24 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import env from "./env.js";
 
-export const inngest = new Inngest({ id: "ginview" });
 
+const connectDB = async () => 
+{
+    const url = env.MONGO_URL;
+    if(!url)
+    {
+        console.log("Mongo_URL not found")
+    }
+    try{
+        await mongoose.connect(url);
+        console.log("Connected to DB Successfully");
+    }
+    catch{
+        console.log("Error in connecting to DB");
+    }
+}
+
+export const inngest = new Inngest({ id: "ginview" });
 export const syncUser = inngest.createFunction(
   { id: "sync-user" },
   { event: "clerk/user.created" },
