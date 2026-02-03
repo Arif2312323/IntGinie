@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import env from "./env.js";
 
-export const inngest = new Inngest({ id: "talent-iq" });
+export const inngest = new Inngest({ id: "ginview" });
 
 export const syncUser = inngest.createFunction(
   { id: "sync-user" },
