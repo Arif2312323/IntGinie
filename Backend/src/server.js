@@ -27,8 +27,8 @@ const connectDB = async () =>
         await mongoose.connect(url);
         console.log("Connected to DB Successfully");
     }
-    catch{
-        console.log(error.message);
+    catch(err){
+        console.error("DB connection error:", err instanceof Error ? err.message : String(err));
     }
 }
 
@@ -39,8 +39,8 @@ const startServer = async ()=>{
         app.listen(env.PORT);
         console.log(`Server is running and up on port ${env.PORT}`);
     }
-    catch(error){
-        console.log(error.message);
+    catch(err){
+        console.error("Server startup error:", err instanceof Error ? err.message : String(err));
     }
 };
 
