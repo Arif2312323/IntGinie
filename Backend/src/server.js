@@ -4,12 +4,16 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./lib/inngest.js";
+import {clerkMiddleware} from "@clerk/express"
+import { protectRoute } from "./middleware/protectRoute.js";
+import chatRoute from "./routes/chatRoute.js"
 
 const app = express();
 
 
 app.use(express.json());
 app.use(cors());
+app.use(clerkMiddleware());
 
 app.use("/api/inngest", serve({ 
   client: inngest, 
@@ -31,8 +35,6 @@ const connectDB = async () =>
         console.error("DB connection error:", err instanceof Error ? err.message : String(err));
     }
 }
-
-
 const startServer = async ()=>{
     try{
         await connectDB();
@@ -45,3 +47,5 @@ const startServer = async ()=>{
 };
 
 startServer();
+
+app.use("/chat",chatRoute);
