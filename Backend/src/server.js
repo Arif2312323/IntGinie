@@ -7,6 +7,7 @@ import { inngest, functions } from "./lib/inngest.js";
 import {clerkMiddleware} from "@clerk/express"
 import { protectRoute } from "./middleware/protectRoute.js";
 import chatRoute from "./routes/chatRoute.js"
+import sessionRoute from "./routes/sessionRoute.js"
 
 const app = express();
 
@@ -14,11 +15,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
-
 app.use("/api/inngest", serve({ 
   client: inngest, 
   functions: functions 
 }));
+app.use("api/chat",chatRoute);
+app.use("api/sessions",sessionRoute);
 
 const connectDB = async () => 
 {
@@ -47,5 +49,3 @@ const startServer = async ()=>{
 };
 
 startServer();
-
-app.use("/chat",chatRoute);

@@ -1,18 +1,13 @@
-import { SignedIn, SignedOut, SignIn, SignInButton, SignOutButton, UserButton } from "@clerk/clerk-react"
+import { Routes, Route } from "react-router-dom"
+import HomePage from "./pages/HomePage"
+import ProblemsPage  from "./pages/ProblemsPage"
 
 function App() {
-
   return (
-    <>
-    <SignedOut>
-      <SignInButton mode = "modal"></SignInButton>
-    </SignedOut>
-    <SignedIn>
-      <SignOutButton/>
-    </SignedIn>
-
-    <UserButton/>
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/problems" element = {<ProblemsPage/>}/>
+    </Routes>
   )
 }
 
