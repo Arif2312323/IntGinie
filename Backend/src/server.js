@@ -13,14 +13,18 @@ const app = express();
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: true,        // allow all origins
+  credentials: true    // allow cookies/auth headers (needed for Clerk)
+}));
 app.use(clerkMiddleware());
 app.use("/api/inngest", serve({ 
   client: inngest, 
   functions: functions 
 }));
-app.use("api/chat",chatRoute);
-app.use("api/sessions",sessionRoute);
+
+app.use("/api/chat",chatRoute);
+app.use("/api/sessions",sessionRoute);
 
 const connectDB = async () => 
 {

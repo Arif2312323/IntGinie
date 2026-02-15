@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -8,7 +8,7 @@ import {
   VideoIcon,
   ZapIcon,
 } from "lucide-react";
-import { SignIn, SignInButton, UserButton,SignedIn } from "@clerk/clerk-react";
+import { SignIn, SignInButton, UserButton,SignedIn, SignedOut } from "@clerk/clerk-react";
 
 function HomePage() {
   return (
@@ -34,12 +34,23 @@ function HomePage() {
           </Link>
 
           {/* AUTH BTN */}
-          <SignInButton mode="modal">
-            <button className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-xl text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2">
-              <span>Get Started</span>
-              <ArrowRightIcon className="size-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
-          </SignInButton>
+          <SignedIn>
+            <div className="flex gap-5">
+              <Link to = "/Dashboard" className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-xl text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2">
+                <span>Dashboard</span>
+                <ArrowRightIcon className="size-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <UserButton/>
+            </div>
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-xl text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2">
+                <span>Get Started</span>
+                <ArrowRightIcon className="size-4 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </SignInButton>
+          </SignedOut>
         </div>
       </nav>
 
@@ -84,12 +95,20 @@ function HomePage() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <SignInButton mode="modal">
-                <button className="btn btn-primary btn-lg">
-                  Start Coding Now
+              <SignedIn>
+                <Link to="/Dashboard" className="btn btn-primary btn-lg">
+                  Explore Our Problems
                   <ArrowRightIcon className="size-5" />
-                </button>
-              </SignInButton>
+                </Link>
+              </SignedIn>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="btn btn-primary btn-lg">
+                    Start Coding Now
+                    <ArrowRightIcon className="size-5" />
+                  </button>
+                </SignInButton>
+              </SignedOut>
             </div>
 
             {/* STATS */}

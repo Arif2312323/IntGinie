@@ -5,6 +5,9 @@ import {createSession,getActiveSessions,getMyRecentSessions,getSessionById,joinS
 
 const router = Router();
 
+router.get("/health",(req,res)=>{
+    return res.json({message:"Session routes up"});
+})
 router.post("/",protectRoute,createSession);
 router.get("/active",protectRoute,getActiveSessions);
 router.get("/my-recent",protectRoute,getMyRecentSessions);

@@ -2,6 +2,7 @@ import { chatClient, streamClient } from "../lib/stream.js";
 import Session from "../models/Session.js";
 
 export async function createSession(req, res) {
+  console.log("Request incoming for creating session");
   try {
     const { problem, difficulty } = req.body;
     const userId = req.user._id;
@@ -57,6 +58,7 @@ export async function getActiveSessions(_, res) {
 }
 
 export async function getMyRecentSessions(req, res) {
+  console.log("Request incoming for my recent sessions");
   try {
     const userId = req.user._id;
 
