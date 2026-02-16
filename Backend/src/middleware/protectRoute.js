@@ -2,7 +2,6 @@ import {requireAuth} from "@clerk/express"
 import User from "../models/User.js"
 
 export const protectRoute = [
-    requireAuth({signInUrl:"/sign-in"}),
     async(req,res,next) =>{
         console.log("req incoming at protect route")
         try

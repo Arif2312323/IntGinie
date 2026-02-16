@@ -30,7 +30,7 @@ export const sessionApi = {
     return response.data;
   },
   getStreamToken: async () => {
-    const response = await axiosInstance.get(`/chat/token`);
+    const response = await axiosInstance.get(`/chat/getToken`);
     return response.data;
   },
 };
